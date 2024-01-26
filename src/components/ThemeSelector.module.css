@@ -1,0 +1,11 @@
+.theme-selector {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 0.5rem;
+  line-height: 1;
+  font-size: 0.8rem;
+  border: solid 1px;
+  border-radius: 10px;
+}

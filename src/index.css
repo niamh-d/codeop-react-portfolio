@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-welcome-image="woman-camera"] {
+  --welcome-image-source: url(imgs/woman-camera.png);
+}
+
+[data-welcome-image="kid-playing"] {
+  --welcome-image-source: url(imgs/kid-playing.jpg);
+}
+
+[data-welcome-image="man-garden"] {
+  --welcome-image-source: url(imgs/man-garden.jpeg);
+}
+
+[data-welcome-image="dog"] {
+  --welcome-image-source: url(imgs/dog.jpeg);
+}
+
+[data-welcome-image="couple-sea"] {
+  --welcome-image-source: url(imgs/couple-sea.jpeg);
+}
+
+@layer base {
+  html {
+    font-family: "Proxima Nova", system-ui, sans-serif;
+  }
+  body {
+    @apply p-10;
+  }
+  button {
+    font-family: inherit;
+  }
+  select {
+    @apply p-1;
+    border-radius: 10px;
+  }
+  label {
+    @apply mr-5;
+  }
+  input {
+    font-family: inherit;
+    border-radius: 10px;
+    border: solid 1px;
+    @apply mr-14 p-2 w-48;
+  }
+  textarea {
+    @apply mr-14 p-3 w-52 h-28;
+    border-radius: 10px;
+    border: solid 1px;
+  }
+  h1 {
+    @apply font-extrabold text-3xl;
+  }
+  h2 {
+    @apply font-bold text-2xl mb-4;
+  }
+  img {
+    border-radius: 10px;
+  }
+}
+
+@layer components {
+  .app {
+    @apply p-3;
+  }
+
+  header {
+    justify-content: space-around;
+    @apply mb-28;
+  }
+
+  footer {
+    @apply mt-10;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .flex-end {
+    justify-content: flex-end;
+  }
+
+  .card {
+    @apply p-10;
+    border-radius: 10px;
+    border: 2px solid;
+  }
+
+  .h-center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .favourite-box {
+    max-width: 70rem;
+    display: grid;
+    grid-template-columns: 4fr 3fr 2fr;
+    column-gap: 2rem;
+    animation: moveInLeft 0.5s ease-out 0.75;
+  }
+
+  .title-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    @apply gap-3;
+  }
+
+  .title-box h2 {
+    @apply font-bold text-2xl;
+  }
+
+  .title-box h2,
+  .title-box svg {
+    margin: 0;
+    @apply m-0 p-0 mb-5;
+  }
+
+  .title-box svg {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+  }
+
+  .favourite-box img {
+    width: 100%;
+  }
+
+  .favourite-text-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .container-admin {
+    max-width: 35rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container-projects {
+    max-width: 70rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    animation: moveInBottom 0.5s ease-out 0.75;
+  }
+
+  .project {
+    @apply text-justify;
+    max-width: 20rem;
+  }
+
+  .project img {
+    transition: 0.5s ease-out;
+  }
+
+  .project img:hover {
+    transform: scale(1.1);
+  }
+
+  .project svg {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+  }
+
+  .icons-box {
+    @apply flex flex-end gap-3 pb-3;
+    border-bottom: solid 1px;
+    width: 50%;
+    align-self: self-end;
+  }
+
+  .container-editor {
+    max-width: 70rem;
+  }
+
+  @keyframes moveInBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(8rem);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+
+  @keyframes moveInLeft {
+    0% {
+      opacity: 0;
+      transform: translateX(-8rem);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+}
