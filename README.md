@@ -14,7 +14,7 @@ Niiv Dev OÜ is a fictional company. This is a practice React project coded up f
 
 At the link below you can watch a short demo of the app:
 
-[Video demo of app](https://x.com/niamh_codes/status/1750861943877824533?s=20)
+[Video demo of app](https://twitter.com/niamh_codes/status/1751604840378020146)
 
 ## How to run
 
@@ -41,7 +41,7 @@ npm run dev
 
 ### Welcome screen
 
-Login takes the user to the gallery (main) screen. Logout from the app takes the user back to the welcome screen.
+Login takes the user to the gallery (main) screen. Logout from the app takes the user back to the welcome screen. The image on the welcome screen is randomised.
 
 ![Welcome screen](imgs/welcome-screen.png)
 
