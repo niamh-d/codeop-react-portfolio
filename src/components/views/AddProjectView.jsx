@@ -6,70 +6,71 @@ import Card from "../Card";
 import Project from "../Project";
 import Modal from "../Modal";
 
-const EditProjectView = () => {
-  const { dispatch, editProject, projectBeingEditedId, projects } =
-    useProjects();
+const URL = "https://images.unsplash.com/photo-1561037404-61cd46aa615b";
 
-  const [project] = projects.filter((proj) => proj.id === projectBeingEditedId);
+const AddProjectView = () => {
+  const { dispatch, addProject } = useProjects();
 
-  const { title, source, description } = project;
-
-  const titleRef = useRef(title);
-  const sourceRef = useRef(source);
-  const descriptionRef = useRef(description);
+  const titleRef = useRef("Waiting for your title");
+  const sourceRef = useRef(URL);
+  const descriptionRef = useRef("Waiting for your description");
 
   const formDetailsObj = {
-    title,
-    source,
-    description,
+    title: titleRef.current,
+    source: sourceRef.current,
+    description: descriptionRef.current,
   };
 
   const [detailsObj, setDetailsObj] = useState(formDetailsObj);
 
   const onInputsChangeHandler = () => {
+    const title =
+      titleRef.current.value.replaceAll(" ", "") === ""
+        ? "Waiting for your title"
+        : titleRef.current.value;
+    const description =
+      descriptionRef.current.value.replaceAll(" ", "") === ""
+        ? "Waiting for your description"
+        : descriptionRef.current.value;
+    const source =
+      sourceRef.current.value.replaceAll(" ", "") === ""
+        ? URL
+        : sourceRef.current.value;
+
     setDetailsObj({
-      title: titleRef.current.value,
-      source: sourceRef.current.value,
-      description: descriptionRef.current.value,
+      title: title,
+      source: source,
+      description: description,
     });
   };
 
-  const onReset = () => {
-    titleRef.current.value = title;
-    descriptionRef.current.value = description;
-    sourceRef.current.value = source;
-    setDetailsObj({ title, source, description });
-  };
-
-  const editProjectHandler = (e) => {
+  const addNewProjectHandler = (e) => {
     e.preventDefault();
+    const newId = Date.now().toString();
 
-    editProject({ id: projectBeingEditedId, ...detailsObj });
+    addProject({ id: newId, ...detailsObj });
 
-    document.getElementById("modal_edit").showModal();
+    document.getElementById("modal_add").showModal();
   };
 
-  const onExitEditProjectView = () =>
-    dispatch({ type: "closeEditProjectView" });
+  const onExitAddNewProjectView = () =>
+    dispatch({ type: "closeAddProjectView" });
 
   return (
     <>
       <Modal
-        onClickHandler={onExitEditProjectView}
-        modalId="modal_edit"
+        onClickHandler={onExitAddNewProjectView}
+        modalId="modal_add"
         heading="Success!"
-        messageText="Your project has been edited. Press the button to return to gallery."
+        messageText="Your project has been added. Press the button to return to gallery."
       />
-      <div className="flex flex-col">
-        <h1 className="text-2xl mb-5">Edit project "{project.title}"</h1>
-        <button onClick={onReset} className="btn btn-ghost mb-10">
-          Reset to original project details
-        </button>
 
+      <div className="flex flex-col">
+        <h1 className="text-2xl mb-10">Add new project</h1>
         <div className="flex items-start gap-16 edit-project-container">
           <form
             className="form flex items-start flex-col gap-5"
-            onSubmit={editProjectHandler}
+            onSubmit={addNewProjectHandler}
             onChange={onInputsChangeHandler}
           >
             <div className="flex flex-col gap-2 items-start">
@@ -81,7 +82,7 @@ const EditProjectView = () => {
                 id="title"
                 type="text"
                 ref={titleRef}
-                defaultValue={titleRef.current}
+                placeholder="Type project title here"
                 className="input input-accent input-bordered w-full max-w-s"
               />
             </div>
@@ -94,7 +95,7 @@ const EditProjectView = () => {
                 type="text"
                 id="source"
                 ref={sourceRef}
-                defaultValue={sourceRef.current}
+                placeholder="Your image url or leave blank"
                 className="input input-accent input-bordered w-full max-w-s"
               />
             </div>
@@ -106,7 +107,7 @@ const EditProjectView = () => {
                 ref={descriptionRef}
                 required
                 id="description"
-                defaultValue={descriptionRef.current}
+                placeholder="Type project description here"
                 className="textarea textarea-accent textarea-bordered text-lg w-64 h-40"
               ></textarea>
             </div>
@@ -115,14 +116,14 @@ const EditProjectView = () => {
               <button
                 type="submit"
                 className="btn btn-primary mr-3 btn-wide"
-                onClick={editProjectHandler}
+                onClick={addNewProjectHandler}
               >
-                Edit project details
+                Add new project
               </button>
               <button
                 type="button"
                 className="btn btn-ghost ml-10"
-                onClick={onExitEditProjectView}
+                onClick={() => dispatch({ type: "closeAddProjectView" })}
               >
                 Cancel
               </button>
@@ -137,6 +138,7 @@ const EditProjectView = () => {
   );
 };
 
-export default EditProjectView;
+export default AddProjectView;
 
-//https://images.unsplash.com/photo-1561037404-61cd46aa615b
+//https://images.unsplash.com/photo-1561037404-61cd46aa615b (dog)
+//https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba (cat)

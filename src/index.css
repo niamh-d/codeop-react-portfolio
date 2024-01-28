@@ -59,11 +59,18 @@
   img {
     border-radius: 10px;
   }
+
+  main {
+    min-height: 60vh;
+    max-width: 100rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @layer components {
   .app {
-    @apply p-3;
+    @apply p-2;
   }
 
   header {
@@ -71,8 +78,15 @@
     @apply mb-28;
   }
 
-  footer {
-    @apply mt-10;
+  .edit-project-container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form {
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   svg {
@@ -159,6 +173,7 @@
   .project {
     @apply text-justify;
     max-width: 20rem;
+    position: relative;
   }
 
   .project img {
@@ -175,14 +190,10 @@
   }
 
   .icons-box {
-    @apply flex flex-end gap-3 pb-3;
+    @apply flex flex-end gap-3 pb-3 mt-5;
     border-bottom: solid 1px;
     width: 50%;
     align-self: self-end;
-  }
-
-  .container-editor {
-    max-width: 70rem;
   }
 
   @keyframes moveInBottom {

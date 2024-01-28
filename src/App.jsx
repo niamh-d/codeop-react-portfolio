@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import WelcomeView from "./components/views/WelcomeView";
 import GalleryView from "./components/views/GalleryView";
 import EditProjectView from "./components/views/EditProjectView";
@@ -7,32 +5,29 @@ import { useProjects } from "./contexts/ProjectsContext";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
+import AddProjectView from "./components/views/AddProjectView";
+import FavouredProject from "./components/FavouredProject";
 
 function App() {
-  const { dispatch, isLoggedIn, isEditProjectView } = useProjects();
-
-  useEffect(
-    function () {
-      fetch("http://localhost:9000/projects")
-        .then((res) => res.json())
-        .then((data) => dispatch({ type: "dataReceived", payload: data }))
-        .catch((err) => dispatch({ type: "dataFailed", payload: err }));
-    },
-    [dispatch]
-  );
+  const { activeView, favouredProjectId } = useProjects();
 
   return (
     <div className="app">
-      {!isLoggedIn && <WelcomeView />}
+      {activeView === "welcome" && <WelcomeView />}
 
-      {isLoggedIn && (
+      {activeView !== "welcome" && (
         <>
           <Header />
           <Main>
-            {!isEditProjectView && <GalleryView />}
-            {isEditProjectView && <EditProjectView />}
+            {activeView === "gallery" && (
+              <>
+                {favouredProjectId && <FavouredProject />}
+                <GalleryView />
+              </>
+            )}
+            {activeView === "edit-project" && <EditProjectView />}
+            {activeView === "add-project" && <AddProjectView />}
           </Main>
-
           <Footer />
         </>
       )}

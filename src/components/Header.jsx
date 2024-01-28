@@ -9,9 +9,7 @@ import { useProjects } from "../contexts/ProjectsContext";
 function Header() {
   const { dispatch, isEditorMode } = useProjects();
 
-  const onLogOut = () => {
-    dispatch({ type: "logOut" });
-  };
+  const onLogOut = () => dispatch({ type: "logOut" });
 
   return (
     <header className="flex">

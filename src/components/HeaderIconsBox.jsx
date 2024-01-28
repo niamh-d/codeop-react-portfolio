@@ -3,22 +3,38 @@ import Tooltip from "@mui/material/Tooltip";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import CollectionsIcon from "@mui/icons-material/Collections";
 
 import { useProjects } from "../contexts/ProjectsContext";
 
 const HeaderIconsBox = () => {
-  const { dispatch } = useProjects();
-
-  const onEnableEditor = () => dispatch({ type: "enableEditor" });
+  const { dispatch, activeView, isEditorMode, isError, isLoading } =
+    useProjects();
 
   return (
-    <div className="flex gap-3">
+    <div className={`flex gap-3 ${isLoading || isError ? "invisible" : null}`}>
       <Tooltip title="Add new project">
-        <AddCircleIcon onClick={onEnableEditor} />
+        <AddCircleIcon
+          className={`${activeView === "add-project" ? "invisible" : null}`}
+          onClick={() => dispatch({ type: "openAddProjectView" })}
+        />
       </Tooltip>
-      <Tooltip title="Enable editor mode">
-        <ModeEditOutlineOutlinedIcon onClick={onEnableEditor} />
-      </Tooltip>
+
+      {!isEditorMode && (
+        <Tooltip title="Enable editor mode">
+          <ModeEditOutlineOutlinedIcon
+            onClick={() => dispatch({ type: "enableEditorMode" })}
+          />
+        </Tooltip>
+      )}
+
+      {isEditorMode && (
+        <Tooltip title="Return to gallery mode">
+          <CollectionsIcon
+            onClick={() => dispatch({ type: "disableEditorMode" })}
+          />
+        </Tooltip>
+      )}
     </div>
   );
 };

@@ -1,8 +1,16 @@
-function Error() {
+import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
+
+function Error({ error }) {
   return (
-    <p className="error">
-      <span>💥</span> There was an error fecthing projects.
-    </p>
+    <div className="flex justify-center text-xl">
+      <div
+        role="alert"
+        className="alert alert-error w-6/12 flex justify-center font-semibold"
+      >
+        <ErrorOutlineOutlinedIcon />
+        <span>{error}</span>
+      </div>
+    </div>
   );
 }
 

@@ -24,15 +24,18 @@ const WelcomeView = () => {
 
   const { dispatch } = useProjects();
 
-  const onLogIn = () => {
-    dispatch({ type: "logIn" });
-  };
-
   return (
     <div className={styles["welcome-screen"]}>
       <div className={styles["text-container"]}>
-        <h1 className="text-5xl mb-11">Welcome to Portfolio Editor!</h1>
-        <Button type="btn-primary" text="Log In" handleClick={onLogIn} />
+        <h1 className="text-5xl mb-5">Welcome to Porfolitor&trade;</h1>
+        <p className="text-2xl mb-16">
+          Your personal portfolio management solution
+        </p>
+        <Button
+          type="btn-primary btn-lg text-xl"
+          text="Log In"
+          handleClick={() => dispatch({ type: "login" })}
+        />
       </div>
     </div>
   );
